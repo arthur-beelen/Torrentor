@@ -15,14 +15,17 @@ using System.Windows.Forms;
 
 namespace Torrentor
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
-        private ApiCaller ac;
+        //API callers
+        private OMDbCaller omdbCaller;
+        private YtsCaller ytsCaller;
 
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
-            ac = new ApiCaller();
+            omdbCaller = new OMDbCaller();
+            ytsCaller = new YtsCaller();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -58,21 +61,23 @@ namespace Torrentor
 
         private void callApi()
         {
-            ac.search(textBox1.Text);
+            omdbCaller.search(textBox1.Text);
             showData();
-            
+
+            //Use imdbID to search for movie to avoid movies with similar names
+            ytsCaller.search(omdbCaller.result["imdbID"]);
         }
 
         //Add all data from Dictionary result to the form components
         private void showData()
         {
-            foreach (KeyValuePair<string, string> kvp in ac.result)
+            foreach (KeyValuePair<string, string> kvp in omdbCaller.result)
             {
                 richTextBox1.Text += kvp.Key + ": " + kvp.Value + "\n";
             }
 
-            searchTitle.Text = ac.result["Title"];
-            searchScore.Text = ac.result["imdbRating"];
+            searchTitle.Text = omdbCaller.result["Title"];
+            searchScore.Text = omdbCaller.result["imdbRating"];
             displayPoster();
         }
 
@@ -82,19 +87,19 @@ namespace Torrentor
             {
                 e.Handled = true;
                 callApi();
-                
             }
 
             
         }
 
+        //Download poster and display it using a PictureBox
         private void displayPoster()
         {
-            string posterUrl = ac.result["Poster"];
+            string posterUrl = omdbCaller.result["Poster"];
             using (var webClient = new System.Net.WebClient())
             {
+                //TO DO: find better way to temporarily save the picture
                 webClient.DownloadFile(posterUrl, "temp.jpg");
-                // Now parse with JSON.Net
             }
 
             Bitmap bm = new Bitmap("temp.jpg");
