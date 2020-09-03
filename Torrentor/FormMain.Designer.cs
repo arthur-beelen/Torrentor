@@ -54,14 +54,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(659, 27);
+            this.panel1.Size = new System.Drawing.Size(655, 27);
             this.panel1.TabIndex = 0;
             // 
             // advancedSearch
             // 
             this.advancedSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.advancedSearch.AutoSize = true;
-            this.advancedSearch.Location = new System.Drawing.Point(554, 6);
+            this.advancedSearch.Location = new System.Drawing.Point(550, 6);
             this.advancedSearch.Name = "advancedSearch";
             this.advancedSearch.Size = new System.Drawing.Size(93, 13);
             this.advancedSearch.TabIndex = 1;
@@ -119,7 +119,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.Location = new System.Drawing.Point(3, 275);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(414, 213);
+            this.richTextBox1.Size = new System.Drawing.Size(410, 213);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -144,7 +144,7 @@
             this.panel2.Controls.Add(this.searchTitle);
             this.panel2.Location = new System.Drawing.Point(227, 33);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(420, 491);
+            this.panel2.Size = new System.Drawing.Size(416, 491);
             this.panel2.TabIndex = 3;
             // 
             // searchScore
@@ -152,7 +152,7 @@
             this.searchScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.searchScore.AutoSize = true;
             this.searchScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchScore.Location = new System.Drawing.Point(339, 3);
+            this.searchScore.Location = new System.Drawing.Point(335, 3);
             this.searchScore.Margin = new System.Windows.Forms.Padding(3);
             this.searchScore.Name = "searchScore";
             this.searchScore.Size = new System.Drawing.Size(78, 25);
@@ -165,7 +165,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar1.Location = new System.Drawing.Point(230, 546);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(417, 13);
+            this.progressBar1.Size = new System.Drawing.Size(413, 13);
             this.progressBar1.TabIndex = 4;
             // 
             // statusLabel
@@ -175,7 +175,7 @@
             this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusLabel.Location = new System.Drawing.Point(227, 527);
             this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(420, 16);
+            this.statusLabel.Size = new System.Drawing.Size(416, 16);
             this.statusLabel.TabIndex = 3;
             this.statusLabel.Text = "Idle.";
             this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -185,14 +185,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 571);
+            this.ClientSize = new System.Drawing.Size(655, 571);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Name = "FormMain";
-            this.Text = "Form1";
+            this.Text = "Torrentor";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

@@ -63,6 +63,7 @@ namespace Torrentor
             return json.Remove(endJson, json.Length - endJson);
         }
 
+        //Browse the JSON by subsequently taking the values from the keys in the array jsonLookUp
         private string browseJson(string json, string [] jsonLookUp)
         {
             for(int i = 0; i < jsonLookUp.Length; i++)
@@ -70,7 +71,7 @@ namespace Torrentor
             return json;
         }
 
-        //Useful to quickly retrieve 
+        //Useful to quickly retrieve a value in a JSON object
         private string getJsonValue(string json, string valueName)
         {
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
