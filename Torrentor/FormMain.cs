@@ -61,11 +61,26 @@ namespace Torrentor
 
         private void callApi()
         {
+            updateProgress(10, "Looking up movie with OMDb API.");
+
             omdbCaller.search(textBox1.Text);
+
+            updateProgress(40, "Lookup successful. Updating UI.");
+
             showData();
+
+            updateProgress(10, "UI updated. Calling YTS API.");
 
             //Use imdbID to search for movie to avoid movies with similar names
             ytsCaller.search(omdbCaller.result["imdbID"]);
+
+            updateProgress(40, "YTS API called successfully.");
+        }
+
+        private void updateProgress(int increment, string message)
+        {
+            progressBar1.Increment(increment);
+            statusLabel.Text = message;
         }
 
         //Add all data from Dictionary result to the form components
@@ -105,6 +120,11 @@ namespace Torrentor
             Bitmap bm = new Bitmap("temp.jpg");
             pictureBox2.Image = bm;
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
+
+        }
+
+        private void label1_Click_2(object sender, EventArgs e)
+        {
 
         }
     }
