@@ -13,9 +13,12 @@ namespace Torrentor
     //Uses Yts API to get a torrent ready to download
     class YtsCaller
     {
+        public Dictionary<string, string> result;
+
         //Search a movie with the following title
         public int search(string imdbID)
         {
+            result = new Dictionary<string, string>();
             string api = "https://yts.mx/api/v2/list_movies.json?query_term=" + imdbID;
             string json;
 
@@ -24,11 +27,6 @@ namespace Torrentor
                 json = webClient.DownloadString(api);
 
             }
-            /*
-            JsonTextReader reader = new JsonTextReader(new StringReader(json));
-            JObject jObject = JObject.Load(reader);
-            string jsonData = jObject.GetValue("data").Value<String>();
-            */
             if (json.Contains("movies"))
             {
                 string[] jsonLookUp = { "data", "movies" };
@@ -41,18 +39,23 @@ namespace Torrentor
                 Console.WriteLine(json);
 
                 string[] torrentJsonObjects = getJsonObjectsFromArray(getJsonValue(json, "torrents"));
-                for (int i = 0; i < torrentJsonObjects.Length; i++)
-                    Console.WriteLine(torrentJsonObjects[i]);
 
+                checkTorrentJsonObjects(torrentJsonObjects);
+                
 
                 return 0;
             }
             return -1;
         }
 
-        private void checkTorrentJsonObject(string torrentJsonObject)
+        //Fill the result dictionary with the urls as values with the corresponding quality as key
+        private void checkTorrentJsonObjects(string[] torrentJsonObjects)
         {
-
+            for (int i = 0; i < torrentJsonObjects.Length; i++)
+            {
+                Console.WriteLine(torrentJsonObjects[i]);
+                result.Add(getJsonValue(torrentJsonObjects[i], "quality"), getJsonValue(torrentJsonObjects[i], "url"));
+            }
         }
 
         private string getJsonObjectFromArray(string json)
