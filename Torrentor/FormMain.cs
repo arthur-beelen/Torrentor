@@ -65,16 +65,31 @@ namespace Torrentor
 
             omdbCaller.search(textBox1.Text);
 
-            updateProgress(40, "Lookup successful. Updating UI.");
+            
+            //Is a movie found by OMDb API?
+            if(omdbCaller.result.Count != 0)
+            {
+                updateProgress(40, "Lookup successful. Updating UI.");
+                showData();
+                updateProgress(10, "UI updated. Calling YTS API.");
+                Console.WriteLine("Number of key pairs: {0}\nimdbID: {1}", omdbCaller.result.Count, omdbCaller.result["imdbID"]);
+                //Use imdbID to search for movie to avoid movies with similar names
+                int status = ytsCaller.search(omdbCaller.result["imdbID"]);
+                if(status == 0)
+                    updateProgress(40, "YTS API called successfully.");
+                else
+                    updateProgress(40, "YTS API failed to find a torrent.");
+            }
+            else
+            {
+                updateProgress(90, "Movie not found. Check for typos.");
+            }
 
-            showData();
+            
 
-            updateProgress(10, "UI updated. Calling YTS API.");
+            
 
-            //Use imdbID to search for movie to avoid movies with similar names
-            ytsCaller.search(omdbCaller.result["imdbID"]);
-
-            updateProgress(40, "YTS API called successfully.");
+            
         }
 
         private void updateProgress(int increment, string message)
@@ -86,14 +101,15 @@ namespace Torrentor
         //Add all data from Dictionary result to the form components
         private void showData()
         {
-            foreach (KeyValuePair<string, string> kvp in omdbCaller.result)
-            {
-                richTextBox1.Text += kvp.Key + ": " + kvp.Value + "\n";
+            if (omdbCaller.result.Count != 0) {
+                foreach (KeyValuePair<string, string> kvp in omdbCaller.result)
+                {
+                    richTextBox1.Text += kvp.Key + ": " + kvp.Value + "\n";
+                }
+                searchTitle.Text = omdbCaller.result["Title"];
+                searchScore.Text = omdbCaller.result["imdbRating"];
+                displayPoster();
             }
-
-            searchTitle.Text = omdbCaller.result["Title"];
-            searchScore.Text = omdbCaller.result["imdbRating"];
-            displayPoster();
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -107,7 +123,7 @@ namespace Torrentor
             
         }
 
-        //Download poster and display it using a PictureBox
+        //Display poster using a PictureBox
         private void displayPoster()
         {
             string posterUrl = omdbCaller.result["Poster"];

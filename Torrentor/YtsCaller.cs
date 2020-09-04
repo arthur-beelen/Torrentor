@@ -14,7 +14,7 @@ namespace Torrentor
     class YtsCaller
     {
         //Search a movie with the following title
-        public void search(string imdbID)
+        public int search(string imdbID)
         {
             string api = "https://yts.mx/api/v2/list_movies.json?query_term=" + imdbID;
             string json;
@@ -29,25 +29,63 @@ namespace Torrentor
             JObject jObject = JObject.Load(reader);
             string jsonData = jObject.GetValue("data").Value<String>();
             */
-            string[] jsonLookUp = { "data", "movies" };
-            json = browseJson(json, jsonLookUp);
+            if (json.Contains("movies"))
+            {
+                string[] jsonLookUp = { "data", "movies" };
+                json = browseJson(json, jsonLookUp);
 
-            //JArray jArray = JArray.Parse(json);
+                //JArray jArray = JArray.Parse(json);
 
-            json = getJsonObjectFromArray(json);
-            Console.WriteLine(json);
+                //Pick the only movie at index 0
+                json = getJsonObjectFromArray(json);
+                Console.WriteLine(json);
+
+                string[] torrentJsonObjects = getJsonObjectsFromArray(getJsonValue(json, "torrents"));
+                for (int i = 0; i < torrentJsonObjects.Length; i++)
+                    Console.WriteLine(torrentJsonObjects[i]);
 
 
+                return 0;
+            }
+            return -1;
+        }
+
+        private void checkTorrentJsonObject(string torrentJsonObject)
+        {
 
         }
 
-        //If the object is within an array in the JSON, this will remove the array brackets
         private string getJsonObjectFromArray(string json)
         {
+            //Remove the '[' and ']' brackets
             int startJson = json.IndexOf("{");
             json = json.Remove(0, startJson);
             int endJson = json.LastIndexOf("}") + 1;
             return json.Remove(endJson, json.Length - endJson);
+        }
+
+        //Take an object out of an array (in json)
+        private string[] getJsonObjectsFromArray(string json)
+        {
+            //Remove the '[' and ']' brackets
+            int startJson = json.IndexOf("{");
+            json = json.Remove(0, startJson);
+            int endJson = json.LastIndexOf("}") + 1;
+            json = json.Remove(endJson, json.Length - endJson);
+
+            string[] separator = { "}," };
+            string[] jsonObjects = json.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+            int size = jsonObjects.Length;
+            if (size > 1)
+            {
+                for (int i = 0; i < size; i++)
+                {
+                    if(i != size - 1)
+                        jsonObjects[i] = String.Concat(jsonObjects[i], "}");
+                }
+            }
+            Console.WriteLine(jsonObjects[0]);
+            return jsonObjects;
         }
 
         //Browse the JSON by subsequently taking the values from the keys in the array jsonLookUp
