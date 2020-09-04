@@ -40,6 +40,9 @@
             this.searchScore = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.statusLabel = new System.Windows.Forms.Label();
+            this.button720p = new System.Windows.Forms.Button();
+            this.button1080p = new System.Windows.Forms.Button();
+            this.button2160p = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel2.SuspendLayout();
@@ -54,14 +57,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(655, 27);
+            this.panel1.Size = new System.Drawing.Size(781, 27);
             this.panel1.TabIndex = 0;
             // 
             // advancedSearch
             // 
             this.advancedSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.advancedSearch.AutoSize = true;
-            this.advancedSearch.Location = new System.Drawing.Point(550, 6);
+            this.advancedSearch.Location = new System.Drawing.Point(676, 6);
             this.advancedSearch.Name = "advancedSearch";
             this.advancedSearch.Size = new System.Drawing.Size(93, 13);
             this.advancedSearch.TabIndex = 1;
@@ -117,9 +120,9 @@
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(3, 275);
+            this.richTextBox1.Location = new System.Drawing.Point(6, 198);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(410, 213);
+            this.richTextBox1.Size = new System.Drawing.Size(442, 261);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -129,8 +132,9 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox2.Location = new System.Drawing.Point(12, 33);
             this.pictureBox2.MaximumSize = new System.Drawing.Size(300, 1080);
+            this.pictureBox2.MinimumSize = new System.Drawing.Size(300, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(209, 526);
+            this.pictureBox2.Size = new System.Drawing.Size(300, 526);
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
             // 
@@ -139,12 +143,15 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.button2160p);
+            this.panel2.Controls.Add(this.button1080p);
+            this.panel2.Controls.Add(this.button720p);
             this.panel2.Controls.Add(this.searchScore);
             this.panel2.Controls.Add(this.richTextBox1);
             this.panel2.Controls.Add(this.searchTitle);
-            this.panel2.Location = new System.Drawing.Point(227, 33);
+            this.panel2.Location = new System.Drawing.Point(318, 33);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(416, 491);
+            this.panel2.Size = new System.Drawing.Size(451, 491);
             this.panel2.TabIndex = 3;
             // 
             // searchScore
@@ -152,7 +159,7 @@
             this.searchScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.searchScore.AutoSize = true;
             this.searchScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchScore.Location = new System.Drawing.Point(335, 3);
+            this.searchScore.Location = new System.Drawing.Point(370, 3);
             this.searchScore.Margin = new System.Windows.Forms.Padding(3);
             this.searchScore.Name = "searchScore";
             this.searchScore.Size = new System.Drawing.Size(78, 25);
@@ -163,9 +170,9 @@
             // 
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(230, 546);
+            this.progressBar1.Location = new System.Drawing.Point(318, 546);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(413, 13);
+            this.progressBar1.Size = new System.Drawing.Size(451, 10);
             this.progressBar1.TabIndex = 4;
             // 
             // statusLabel
@@ -173,19 +180,51 @@
             this.statusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusLabel.Location = new System.Drawing.Point(227, 527);
+            this.statusLabel.Location = new System.Drawing.Point(318, 527);
             this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(416, 16);
+            this.statusLabel.Size = new System.Drawing.Size(451, 16);
             this.statusLabel.TabIndex = 3;
             this.statusLabel.Text = "Idle.";
             this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.statusLabel.Click += new System.EventHandler(this.label1_Click_2);
+            // 
+            // button720p
+            // 
+            this.button720p.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button720p.Enabled = false;
+            this.button720p.Location = new System.Drawing.Point(211, 465);
+            this.button720p.Name = "button720p";
+            this.button720p.Size = new System.Drawing.Size(75, 23);
+            this.button720p.TabIndex = 3;
+            this.button720p.Text = "720P";
+            this.button720p.UseVisualStyleBackColor = true;
+            // 
+            // button1080p
+            // 
+            this.button1080p.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1080p.Enabled = false;
+            this.button1080p.Location = new System.Drawing.Point(292, 465);
+            this.button1080p.Name = "button1080p";
+            this.button1080p.Size = new System.Drawing.Size(75, 23);
+            this.button1080p.TabIndex = 4;
+            this.button1080p.Text = "1080P";
+            this.button1080p.UseVisualStyleBackColor = true;
+            // 
+            // button2160p
+            // 
+            this.button2160p.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2160p.Enabled = false;
+            this.button2160p.Location = new System.Drawing.Point(373, 465);
+            this.button2160p.Name = "button2160p";
+            this.button2160p.Size = new System.Drawing.Size(75, 23);
+            this.button2160p.TabIndex = 5;
+            this.button2160p.Text = "2160P";
+            this.button2160p.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(655, 571);
+            this.ClientSize = new System.Drawing.Size(781, 571);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.pictureBox2);
@@ -193,7 +232,7 @@
             this.Controls.Add(this.panel2);
             this.Name = "FormMain";
             this.Text = "Torrentor";
-            this.Load += new System.EventHandler(this.FormMain_Load);
+
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -216,6 +255,9 @@
         private System.Windows.Forms.Label searchScore;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.Button button2160p;
+        private System.Windows.Forms.Button button1080p;
+        private System.Windows.Forms.Button button720p;
     }
 }
 

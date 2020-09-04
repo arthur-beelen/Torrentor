@@ -114,22 +114,33 @@ namespace Torrentor
             using (var webClient = new System.Net.WebClient())
             {
                 //TO DO: find better way to temporarily save the picture
+                try
+                {
+                    webClient.DownloadFile(posterUrl, "temp.jpg");
+                }
+                catch (System.Net.WebException e)
+                {
+                    Console.WriteLine(e.ToString());
+                    Console.WriteLine("WebException. Does the file temp.jpg still exist?");
+                    pictureBox2.Image.Dispose();
+                    File.Delete("temp.jpg");
+                    try
+                    {
+                        webClient.DownloadFile(posterUrl, "temp.jpg");
+                    }
+                    catch(Exception p)
+                    {
+                        Console.WriteLine(p.ToString());
+                        Console.WriteLine("There seems to be a different problem.");
+                    }
+                }
                 webClient.DownloadFile(posterUrl, "temp.jpg");
             }
 
             Bitmap bm = new Bitmap("temp.jpg");
+
             pictureBox2.Image = bm;
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
-
-        }
-
-        private void label1_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FormMain_Load(object sender, EventArgs e)
-        {
 
         }
     }
